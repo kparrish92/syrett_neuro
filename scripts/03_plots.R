@@ -6,11 +6,17 @@ fc_task = read.csv(here("data", "at_csc.csv")) %>%
 
 mod = read_rds(here("models", "model_b.rds"))
 
+desc = fc_task %>% 
+  group_by(PROMPT_TYPE, SPEAKER_TYPE) %>% 
+  summarize(n = sum(RESPONSE_CORRECT.)) %>% 
+  mutate(p_s = paste(PROMPT_TYPE, SPEAKER_TYPE, sep = "_")) %>% 
+  select(n, p_s)
+
 percentage = fc_task %>% 
   group_by(PROMPT_TYPE, SPEAKER_TYPE) %>% 
   summarize(total = n()) %>% 
   mutate(p_s = paste(PROMPT_TYPE, SPEAKER_TYPE, sep = "_")) %>% 
-  select(total, p_s) %>% 
+  select(total, p_s, SPEAKER_TYPE) %>% 
   left_join(desc, by = "p_s") %>% 
   mutate(pct = n/total)
 
@@ -18,7 +24,6 @@ percentage = fc_task %>%
 # The Percentage of Correct Responses for autistic and neurotypical speakers for each sentence type") +
 
 percentage %>% 
-  filter(RESPONSE_CORRECT. == 1) %>% 
   ggplot(aes(y = pct, fill = SPEAKER_TYPE, 
              x = PROMPT_TYPE.y)) + 
   geom_col(color = "black", position = "dodge") +

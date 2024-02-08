@@ -1,7 +1,6 @@
 source(here::here("scripts", "00_libs.R"))
 source(here::here("scripts", "01_helpers.R"))
 
-
 fc_task = read.csv(here("data", "at_csc.csv")) %>% 
   filter(!is.na(RESPONSE_CORRECT.))
 

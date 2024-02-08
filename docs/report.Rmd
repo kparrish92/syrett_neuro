@@ -21,6 +21,10 @@ fixef_df = fixef(mod) %>%
   mutate(parameter = paste0("b_", parameter))
 ```
 
+## Updates Feb 8th 2024 
+
+I re-ran the analysis with the new data, and only the `SUBJ` condition was altered (the difference was less).
+
 ## Overall Summary 
 
 Overall, it looks like the participants (n = 43) were more correct at identifying the referent in object questions with neurotypical speakers, but, I think surprisingly were actually better at identifying referents in subject questions by Autistic speakers.
@@ -38,7 +42,7 @@ The model included the default brms priors - Student’s T distribution with 3 d
 
 ### The Percentage of Correct Responses for autistic and neurotypical speakers for each sentence type 
 
-Figure X shows the percentage of correct responses for each prompt and speaker type. 
+Figure 1 shows the percentage of correct responses for each prompt and speaker type. 
 
 ```{r}
 library(here)
